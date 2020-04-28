@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test</title>
+<script src="https://cdn.bootcss.com/jquery/3.5.0/jquery.min.js"></script>
+</head>
+<body>
+	<input type="text" value="123">
+	<button>点我</button>
+</body>
+<script>
+$(function(){
+	$("button").click(function(){
+	var AppID = 'your AppID';
+	var local = encodeURI(location.href); // 回调地址
+	location.href = "http://微信填写的域名/codetoany/getauth.php?auk=demo1&redirect_uri="+local;
+	})
+	var  code = getQuery('code')
+	if (code) {
+		$("input").val(code);
+	}
+	console.log(getQuery('code'))
+	// document.getElementById('code').value=getQuery('code');
+})
+function getQuery(variable) {
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split("=");
+                if (pair[0] == variable) { return pair[1]; }
+            }
+            return (false);
+        }
+</script>
+</html>
